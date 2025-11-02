@@ -25,22 +25,22 @@
                         @endif
                     </div>
                 </div>
-                <div class="flex gap-2">
+                <div class="flex flex-col sm:flex-row sm:gap-2 gap-2">
                     @if($task->status !== 'concluida')
-                    <form action="{{ route('tasks.complete', $task) }}" method="POST">
+                    <form action="{{ route('tasks.complete', $task) }}" method="POST" class="w-full sm:w-auto">
                         @csrf
-                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-lg transition-colors" title="Marcar como concluída">
+                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-lg transition-colors w-full sm:w-auto" title="Marcar como concluída">
                             <i class="fas fa-check mr-2"></i>Concluir
                         </button>
                     </form>
                     @endif
-                    <a href="{{ route('tasks.edit', $task) }}" class="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors" title="Editar tarefa">
+                    <a href="{{ route('tasks.edit', $task) }}" class="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors text-center" title="Editar tarefa">
                         <i class="fas fa-edit mr-2"></i>Editar
                     </a>
-                    <form action="{{ route('tasks.destroy', $task) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta tarefa?');">
+                    <form action="{{ route('tasks.destroy', $task) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta tarefa?');" class="w-full sm:w-auto">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white p-2 rounded-lg transition-colors" title="Excluir tarefa">
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white p-2 rounded-lg transition-colors w-full sm:w-auto" title="Excluir tarefa">
                             <i class="fas fa-trash mr-2"></i>Excluir
                         </button>
                     </form>

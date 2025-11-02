@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-2 sm:mb-0">
                 Meus Projetos
             </h2>
-            <a href="{{ route('projects.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center" title="Criar novo projeto">
+            <a href="{{ route('projects.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center justify-center" title="Criar novo projeto">
                 <i class="fas fa-plus mr-2"></i>Novo Projeto
             </a>
         </div>
@@ -44,18 +44,18 @@
                                 <div>Tarefas: {{ $project->tasks->count() }}</div>
                                 <div>Membros: {{ $project->members->count() + 1 }}</div>
                             </div>
-                            <div class="mt-4 flex space-x-2">
-                                <a href="{{ route('projects.show', $project) }}" class="text-blue-600 hover:text-blue-800 p-2 rounded-lg hover:bg-blue-50 transition-colors" title="Ver projeto">
-                                    <i class="fas fa-eye"></i>
+                            <div class="mt-4 flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
+                                <a href="{{ route('projects.show', $project) }}" class="text-blue-600 hover:text-blue-800 p-3 sm:p-2 rounded-lg hover:bg-blue-50 transition-colors text-center" title="Ver projeto">
+                                    <i class="fas fa-eye mr-1 sm:mr-0"></i><span class="sm:hidden">Ver Projeto</span>
                                 </a>
-                                <a href="{{ route('projects.edit', $project) }}" class="text-yellow-600 hover:text-yellow-800 p-2 rounded-lg hover:bg-yellow-50 transition-colors" title="Editar projeto">
-                                    <i class="fas fa-edit"></i>
+                                <a href="{{ route('projects.edit', $project) }}" class="text-yellow-600 hover:text-yellow-800 p-3 sm:p-2 rounded-lg hover:bg-yellow-50 transition-colors text-center" title="Editar projeto">
+                                    <i class="fas fa-edit mr-1 sm:mr-0"></i><span class="sm:hidden">Editar</span>
                                 </a>
-                                <form action="{{ route('projects.destroy', $project) }}" method="POST" class="inline" onsubmit="return confirm('Tem certeza que deseja excluir este projeto?')">
+                                <form action="{{ route('projects.destroy', $project) }}" method="POST" class="inline w-full sm:w-auto" onsubmit="return confirm('Tem certeza que deseja excluir este projeto?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-800 p-2 rounded-lg hover:bg-red-50 transition-colors" title="Excluir projeto">
-                                        <i class="fas fa-trash"></i>
+                                    <button type="submit" class="text-red-600 hover:text-red-800 p-3 sm:p-2 rounded-lg hover:bg-red-50 transition-colors w-full sm:w-auto" title="Excluir projeto">
+                                        <i class="fas fa-trash mr-1 sm:mr-0"></i><span class="sm:hidden">Excluir</span>
                                     </button>
                                 </form>
                             </div>

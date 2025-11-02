@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-2 sm:mb-0">
                 Minhas Tarefas
             </h2>
-            <a href="{{ route('tasks.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center" title="Criar nova tarefa">
+            <a href="{{ route('tasks.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center justify-center" title="Criar nova tarefa">
                 <i class="fas fa-plus mr-2"></i>Nova Tarefa
             </a>
         </div>
@@ -68,8 +68,8 @@
                     <div class="space-y-3">
                         @foreach($tasks as $task)
                         <div class="border-l-4 border-{{ $task->status === 'concluida' ? 'green' : ($task->status === 'em_andamento' ? 'blue' : 'yellow') }}-500 pl-4 py-3 hover:bg-gray-50 {{ $task->isOverdue() ? 'bg-red-50' : '' }}">
-                            <div class="flex justify-between items-start">
-                                <div class="flex-1">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                                <div class="flex-1 mb-3 sm:mb-0">
                                     <a href="{{ route('tasks.show', $task) }}" class="font-medium text-gray-900 hover:text-blue-600">
                                         {{ $task->title }}
                                     </a>
@@ -100,23 +100,23 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="flex space-x-2 ml-4">
+                                <div class="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0 ml-4 sm:ml-4">
                                     @if($task->status !== 'concluida')
                                     <form action="{{ route('tasks.complete', $task) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="text-green-600 hover:text-green-800 p-2 rounded-lg hover:bg-green-50 transition-colors" title="Concluir tarefa">
-                                            <i class="fas fa-check"></i>
+                                        <button type="submit" class="text-green-600 hover:text-green-800 p-3 sm:p-2 rounded-lg hover:bg-green-50 transition-colors w-full sm:w-auto" title="Concluir tarefa">
+                                            <i class="fas fa-check mr-1 sm:mr-0"></i><span class="sm:hidden">Concluir</span>
                                         </button>
                                     </form>
                                     @endif
-                                    <a href="{{ route('tasks.edit', $task) }}" class="text-blue-600 hover:text-blue-800 p-2 rounded-lg hover:bg-blue-50 transition-colors" title="Editar tarefa">
-                                        <i class="fas fa-edit"></i>
+                                    <a href="{{ route('tasks.edit', $task) }}" class="text-blue-600 hover:text-blue-800 p-3 sm:p-2 rounded-lg hover:bg-blue-50 transition-colors text-center" title="Editar tarefa">
+                                        <i class="fas fa-edit mr-1 sm:mr-0"></i><span class="sm:hidden">Editar</span>
                                     </a>
-                                    <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="inline" onsubmit="return confirm('Excluir esta tarefa?')">
+                                    <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="inline w-full sm:w-auto" onsubmit="return confirm('Excluir esta tarefa?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-800 p-2 rounded-lg hover:bg-red-50 transition-colors" title="Excluir tarefa">
-                                            <i class="fas fa-trash"></i>
+                                        <button type="submit" class="text-red-600 hover:text-red-800 p-3 sm:p-2 rounded-lg hover:bg-red-50 transition-colors w-full sm:w-auto" title="Excluir tarefa">
+                                            <i class="fas fa-trash mr-1 sm:mr-0"></i><span class="sm:hidden">Excluir</span>
                                         </button>
                                     </form>
                                 </div>
