@@ -19,16 +19,13 @@ copy .env.example .env
 ### 4. Gerar chave
 php artisan key:generate
 
-### 5. Criar banco
-mysql -uroot -p -e "CREATE DATABASE task_management CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-
-### 6. Executar migrations (se você não criou o banco ainda, ele será criado aqui)
+### 5. Executar migrations (criação banco de dados e tables)
 php artisan migrate
 
-### 7. Link do storage
+### 6. Link do storage
 php artisan storage:link
 
-### 8. Iniciar servidor
+### 7. Iniciar servidor
 php artisan serve
 
 
