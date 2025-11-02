@@ -6,8 +6,8 @@ xampp (baixar ultima versão para melhor compatibilidade), laragon ou implementa
 "laravel/framework": "^12.0"
 
 ### 1. Clonar
-git clone https://github.com/wag1j1costa/task-management.git
-cd task-management
+- git clone https://github.com/wag1j1costa/task-management.git
+- cd task-management
 
 ### 2. Instalar dependências
 composer install
