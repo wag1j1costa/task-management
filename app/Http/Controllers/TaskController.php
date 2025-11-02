@@ -38,7 +38,7 @@ class TaskController extends Controller
     public function create()
     {
         $projects = auth()->user()->projects;
-        $users = \App\Models\User::where('id', '!=', auth()->id())->get();
+        $users = \App\Models\User::all(); // Incluir todos os usuários, inclusive o atual
         return view('tasks.create', compact('projects', 'users'));
     }
 
@@ -110,7 +110,7 @@ class TaskController extends Controller
         }
 
         $projects = auth()->user()->projects;
-        $users = \App\Models\User::where('id', '!=', auth()->id())->get();
+        $users = \App\Models\User::all(); // Incluir todos os usuários, inclusive o atual
 
         return view('tasks.edit', compact('task', 'projects', 'users'));
     }

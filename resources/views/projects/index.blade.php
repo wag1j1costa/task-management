@@ -4,8 +4,8 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Meus Projetos
             </h2>
-            <a href="{{ route('projects.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
-                Novo Projeto
+            <a href="{{ route('projects.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center" title="Criar novo projeto">
+                <i class="fas fa-plus mr-2"></i>Novo Projeto
             </a>
         </div>
     </x-slot>
@@ -28,7 +28,7 @@
                 <h3 class="text-lg font-semibold mb-4">Projetos Criados por Mim</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @forelse($projects as $project)
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-md transition">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-md transition border border-gray-200 shadow-lg">
                         <div class="p-6">
                             <h4 class="font-bold text-lg mb-2">
                                 <a href="{{ route('projects.show', $project) }}" class="text-gray-900 hover:text-blue-600">
@@ -45,12 +45,18 @@
                                 <div>Membros: {{ $project->members->count() + 1 }}</div>
                             </div>
                             <div class="mt-4 flex space-x-2">
-                                <a href="{{ route('projects.show', $project) }}" class="text-blue-600 hover:text-blue-800 text-sm">Ver</a>
-                                <a href="{{ route('projects.edit', $project) }}" class="text-yellow-600 hover:text-yellow-800 text-sm">Editar</a>
+                                <a href="{{ route('projects.show', $project) }}" class="text-blue-600 hover:text-blue-800 p-2 rounded-lg hover:bg-blue-50 transition-colors" title="Ver projeto">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{{ route('projects.edit', $project) }}" class="text-yellow-600 hover:text-yellow-800 p-2 rounded-lg hover:bg-yellow-50 transition-colors" title="Editar projeto">
+                                    <i class="fas fa-edit"></i>
+                                </a>
                                 <form action="{{ route('projects.destroy', $project) }}" method="POST" class="inline" onsubmit="return confirm('Tem certeza que deseja excluir este projeto?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-800 text-sm">Excluir</button>
+                                    <button type="submit" class="text-red-600 hover:text-red-800 p-2 rounded-lg hover:bg-red-50 transition-colors" title="Excluir projeto">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -71,7 +77,7 @@
                 <h3 class="text-lg font-semibold mb-4">Projetos Compartilhados Comigo</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach($sharedProjects as $project)
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-md transition border-l-4 border-green-500">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-md transition border-l-4 border-2 border-green-500 shadow-lg">
                         <div class="p-6">
                             <h4 class="font-bold text-lg mb-2">
                                 <a href="{{ route('projects.show', $project) }}" class="text-gray-900 hover:text-blue-600">
@@ -88,7 +94,9 @@
                                 <div>Tarefas: {{ $project->tasks->count() }}</div>
                             </div>
                             <div class="mt-4">
-                                <a href="{{ route('projects.show', $project) }}" class="text-blue-600 hover:text-blue-800 text-sm">Ver Projeto</a>
+                                <a href="{{ route('projects.show', $project) }}" class="text-blue-600 hover:text-blue-800 p-2 rounded-lg hover:bg-blue-50 transition-colors inline-flex items-center" title="Ver projeto">
+                                    <i class="fas fa-eye mr-2"></i>Ver Projeto
+                                </a>
                             </div>
                         </div>
                     </div>

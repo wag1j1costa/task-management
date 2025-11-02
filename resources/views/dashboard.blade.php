@@ -5,7 +5,9 @@
     <h1 class="text-3xl font-bold text-gray-900 mb-8">Dashboard</h1>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div class="bg-white overflow-hidden shadow rounded-lg">
+        <!-- Card Tarefas Pendentes -->
+        <div class="bg-white overflow-hidden shadow rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer"
+             onclick="window.location.href='{{ route('tasks.index') }}?status=pendente'">
             <div class="p-5">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 bg-blue-500 rounded-md p-3">
@@ -23,7 +25,9 @@
             </div>
         </div>
 
-        <div class="bg-white overflow-hidden shadow rounded-lg">
+        <!-- Card Em Andamento -->
+        <div class="bg-white overflow-hidden shadow rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer"
+             onclick="window.location.href='{{ route('tasks.index') }}?status=em_andamento'">
             <div class="p-5">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 bg-yellow-500 rounded-md p-3">
@@ -41,7 +45,9 @@
             </div>
         </div>
 
-        <div class="bg-white overflow-hidden shadow rounded-lg">
+        <!-- Card Concluídas -->
+        <div class="bg-white overflow-hidden shadow rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer"
+             onclick="window.location.href='{{ route('tasks.index') }}?status=concluida'">
             <div class="p-5">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 bg-green-500 rounded-md p-3">
@@ -59,7 +65,9 @@
             </div>
         </div>
 
-        <div class="bg-white overflow-hidden shadow rounded-lg">
+        <!-- Card Projetos -->
+        <div class="bg-white overflow-hidden shadow rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer"
+             onclick="window.location.href='{{ route('projects.index') }}'">
             <div class="p-5">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 bg-purple-500 rounded-md p-3">
@@ -95,8 +103,8 @@
                                 @endif
                             </p>
                         </div>
-                        <a href="{{ route('tasks.show', $task) }}" class="text-blue-600 hover:text-blue-800 text-sm">
-                            Ver detalhes
+                        <a href="{{ route('tasks.show', $task) }}" class="text-blue-600 hover:text-blue-800 p-2 rounded-lg hover:bg-blue-50 transition-colors" title="Ver detalhes da tarefa">
+                            <i class="fas fa-eye"></i>
                         </a>
                     </div>
                 </div>
@@ -110,8 +118,8 @@
         <div class="px-4 py-5 sm:p-6">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-lg font-medium text-gray-900">Tarefas Recentes</h2>
-                <a href="{{ route('tasks.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">
-                    Nova Tarefa
+                <a href="{{ route('tasks.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm inline-flex items-center" title="Criar nova tarefa">
+                    <i class="fas fa-plus mr-2"></i>Nova Tarefa
                 </a>
             </div>
             @if($recentTasks->count() > 0)
@@ -129,8 +137,8 @@
                                 @endif
                             </p>
                         </div>
-                        <a href="{{ route('tasks.show', $task) }}" class="text-blue-600 hover:text-blue-800 text-sm">
-                            Ver
+                        <a href="{{ route('tasks.show', $task) }}" class="text-blue-600 hover:text-blue-800 p-2 rounded-lg hover:bg-blue-50 transition-colors" title="Ver tarefa">
+                            <i class="fas fa-eye"></i>
                         </a>
                     </div>
                 </div>

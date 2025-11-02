@@ -108,8 +108,8 @@
         <div class="px-4 py-5 sm:p-6">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-lg font-medium text-gray-900">Tarefas do Projeto</h2>
-                <a href="{{ route('tasks.create', ['project_id' => $project->id]) }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                    Nova Tarefa
+                <a href="{{ route('tasks.create', ['project_id' => $project->id]) }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg inline-flex items-center" title="Criar nova tarefa neste projeto">
+                    <i class="fas fa-plus mr-2"></i>Nova Tarefa
                 </a>
             </div>
 

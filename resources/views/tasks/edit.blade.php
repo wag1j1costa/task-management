@@ -58,6 +58,7 @@
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}" {{ old('assigned_to', $task->assigned_to) == $user->id ? 'selected' : '' }}>
                                     {{ $user->name }} ({{ $user->email }})
+                                    @if($user->id === auth()->id()) - Eu @endif
                                 </option>
                             @endforeach
                         </select>

@@ -83,23 +83,22 @@
                             @enderror
                         </div>
 
-                        <div class="mb-4">
-                            <label for="assigned_to" class="block text-sm font-medium text-gray-700 mb-2">Atribuir a (Opcional)</label>
-                            <select name="assigned_to" id="assigned_to"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                <option value="">Ninguém</option>
-                                @foreach($users as $user)
-                                <option value="{{ $user->id }}" {{ old('assigned_to') == $user->id ? 'selected' : '' }}>
-                                    {{ $user->name }} ({{ $user->email }})
-                                </option>
-                                @endforeach
-                            </select>
-                            @error('assigned_to')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-6">
+        <div class="mb-4">
+            <label for="assigned_to" class="block text-sm font-medium text-gray-700 mb-2">Atribuir a (Opcional)</label>
+            <select name="assigned_to" id="assigned_to"
+                class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <option value="">Ninguém</option>
+                @foreach($users as $user)
+                <option value="{{ $user->id }}" {{ old('assigned_to', auth()->id()) == $user->id ? 'selected' : '' }}>
+                    {{ $user->name }} ({{ $user->email }})
+                    @if($user->id === auth()->id()) - Eu @endif
+                </option>
+                @endforeach
+            </select>
+            @error('assigned_to')
+            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>                        <div class="mb-6">
                             <label for="file" class="block text-sm font-medium text-gray-700 mb-2">Arquivo PDF</label>
                             <input type="file" name="file" id="file" accept=".pdf"
                                 class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">

@@ -29,19 +29,19 @@
                     @if($task->status !== 'concluida')
                     <form action="{{ route('tasks.complete', $task) }}" method="POST">
                         @csrf
-                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
-                            Marcar como Concluída
+                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-lg transition-colors" title="Marcar como concluída">
+                            <i class="fas fa-check mr-2"></i>Concluir
                         </button>
                     </form>
                     @endif
-                    <a href="{{ route('tasks.edit', $task) }}" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded">
-                        Editar
+                    <a href="{{ route('tasks.edit', $task) }}" class="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors" title="Editar tarefa">
+                        <i class="fas fa-edit mr-2"></i>Editar
                     </a>
                     <form action="{{ route('tasks.destroy', $task) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta tarefa?');">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
-                            Excluir
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white p-2 rounded-lg transition-colors" title="Excluir tarefa">
+                            <i class="fas fa-trash mr-2"></i>Excluir
                         </button>
                     </form>
                 </div>

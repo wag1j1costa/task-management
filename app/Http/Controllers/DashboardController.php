@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -10,27 +11,38 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
 
-        $pendingTasks = $user->tasks()
-            ->where('status', 'pendente')
+        // Buscar tarefas criadas pelo usuário OU atribuídas a ele
+        $pendingTasks = Task::where(function($q) {
+            $q->where('user_id', auth()->id())
+              ->orWhere('assigned_to', auth()->id());
+        })->where('status', 'pendente')
             ->count();
 
-        $inProgressTasks = $user->tasks()
-            ->where('status', 'em_andamento')
+        $inProgressTasks = Task::where(function($q) {
+            $q->where('user_id', auth()->id())
+              ->orWhere('assigned_to', auth()->id());
+        })->where('status', 'em_andamento')
             ->count();
 
-        $completedTasks = $user->tasks()
-            ->where('status', 'concluida')
+        $completedTasks = Task::where(function($q) {
+            $q->where('user_id', auth()->id())
+              ->orWhere('assigned_to', auth()->id());
+        })->where('status', 'concluida')
             ->count();
 
-        $overdueTasks = $user->tasks()
-            ->where('status', '!=', 'concluida')
+        $overdueTasks = Task::where(function($q) {
+            $q->where('user_id', auth()->id())
+              ->orWhere('assigned_to', auth()->id());
+        })->where('status', '!=', 'concluida')
             ->where('due_date', '<', now())
             ->with('project')
             ->latest()
             ->get();
 
-        $recentTasks = $user->tasks()
-            ->with('project')
+        $recentTasks = Task::where(function($q) {
+            $q->where('user_id', auth()->id())
+              ->orWhere('assigned_to', auth()->id());
+        })->with('project')
             ->latest()
             ->limit(5)
             ->get();

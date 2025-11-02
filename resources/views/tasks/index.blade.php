@@ -4,8 +4,8 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Minhas Tarefas
             </h2>
-            <a href="{{ route('tasks.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
-                Nova Tarefa
+            <a href="{{ route('tasks.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center" title="Criar nova tarefa">
+                <i class="fas fa-plus mr-2"></i>Nova Tarefa
             </a>
         </div>
     </x-slot>
@@ -82,6 +82,16 @@
                                         <span class="mx-2">•</span>
                                         @endif
                                         Vencimento: {{ $task->due_date->format('d/m/Y') }}
+                                        @if($task->assignedTo)
+                                        <span class="mx-2">•</span>
+                                        <span class="mr-2">Atribuída a:
+                                            @if($task->assigned_to === auth()->id())
+                                                <span class="font-medium text-blue-600">Você</span>
+                                            @else
+                                                {{ $task->assignedTo->name }}
+                                            @endif
+                                        </span>
+                                        @endif
                                         <span class="ml-2 px-2 py-1 text-xs rounded-full bg-{{ $task->priority === 'alta' ? 'red' : ($task->priority === 'media' ? 'yellow' : 'green') }}-100 text-{{ $task->priority === 'alta' ? 'red' : ($task->priority === 'media' ? 'yellow' : 'green') }}-800">
                                             {{ ucfirst($task->priority) }}
                                         </span>
@@ -94,16 +104,20 @@
                                     @if($task->status !== 'concluida')
                                     <form action="{{ route('tasks.complete', $task) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="text-green-600 hover:text-green-800 text-sm">
-                                            Concluir
+                                        <button type="submit" class="text-green-600 hover:text-green-800 p-2 rounded-lg hover:bg-green-50 transition-colors" title="Concluir tarefa">
+                                            <i class="fas fa-check"></i>
                                         </button>
                                     </form>
                                     @endif
-                                    <a href="{{ route('tasks.edit', $task) }}" class="text-yellow-600 hover:text-yellow-800 text-sm">Editar</a>
+                                    <a href="{{ route('tasks.edit', $task) }}" class="text-blue-600 hover:text-blue-800 p-2 rounded-lg hover:bg-blue-50 transition-colors" title="Editar tarefa">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
                                     <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="inline" onsubmit="return confirm('Excluir esta tarefa?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-800 text-sm">Excluir</button>
+                                        <button type="submit" class="text-red-600 hover:text-red-800 p-2 rounded-lg hover:bg-red-50 transition-colors" title="Excluir tarefa">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </form>
                                 </div>
                             </div>

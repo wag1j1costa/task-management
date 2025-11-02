@@ -149,9 +149,11 @@ Representa as tarefas individuais que podem estar associadas a projetos.
 
 **Regras de Negócio:**
 - O criador da tarefa pode visualizar, editar e excluir
-- O usuário atribuído pode visualizar, editar e marcar como concluída
+- O usuário atribuído pode visualizar, editar e marcar como concluída (mesmo que não seja o criador)
+- Tarefas podem ser atribuídas ao próprio criador
 - Tarefas sem projeto são tarefas pessoais
 - Tarefas sem usuário atribuído são gerenciadas apenas pelo criador
+- Tarefas atribuídas aparecem nos cards do dashboard do usuário responsável
 
 ---
 
@@ -198,7 +200,7 @@ Tabela intermediária para relacionamento N:M entre usuários e projetos.
    - `ON DELETE CASCADE`: Se o usuário criador for deletado, suas tarefas são deletadas
 
 3. **TASKS.project_id → PROJECTS.id**
-   - `ON DELETE SET NULL`: Se o projeto for deletado, a tarefa continua existindo como tarefa pessoal
+   - `ON DELETE CASCADE`: Se o projeto for deletado, as tarefas do projeto também são deletadas
 
 4. **TASKS.assigned_to → USERS.id**
    - `ON DELETE SET NULL`: Se o usuário atribuído for deletado, a tarefa volta para o criador
@@ -208,5 +210,39 @@ Tabela intermediária para relacionamento N:M entre usuários e projetos.
 
 6. **PROJECT_MEMBERS.user_id → USERS.id**
    - `ON DELETE CASCADE`: Se o usuário for deletado, suas associações como membro são removidas
+
+---
+
+## Funcionalidades Implementadas
+
+### 🎯 **Sistema de Atribuição de Tarefas**
+- Tarefas podem ser atribuídas a qualquer usuário do sistema, incluindo o próprio criador
+- Interface com dropdown para seleção do responsável
+- Pré-seleção automática do usuário atual ao criar novas tarefas
+- Indicação visual de "Você" na lista de usuários
+
+### 📊 **Dashboard Inteligente**
+- Cards clicáveis com animações de hover que filtram tarefas por status
+- Contadores incluem tarefas criadas + tarefas atribuídas ao usuário
+- Seções de tarefas atrasadas e tarefas recentes
+- Navegação direta para áreas específicas
+
+### 🎨 **Interface Moderna**
+- Ícones Font Awesome em todas as ações (visualizar, editar, excluir, concluir)
+- Tooltips informativos em todos os botões
+- Animações suaves de hover e transições
+- Inputs com padding e bordas visíveis para melhor UX
+
+### 🔄 **Arquitetura Blade Components**
+- Migração completa de layouts para sistema de componentes
+- `app-layout`: Layout principal para usuários autenticados
+- `guest-layout`: Layout para páginas de autenticação
+- Estrutura mais limpa e reutilizável
+
+### 📱 **Responsividade e Acessibilidade**
+- Design responsivo em todas as páginas
+- Tooltips para melhor acessibilidade
+- Cores e ícones intuitivos para diferentes ações
+- Feedback visual consistente
 
 ---
